@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 28 · Hematologic Function & Treatment</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #58111a, #3a0b12);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: #fce9ec;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 40px rgba(90, 20, 30, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #a1252f, #72141d);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            border-bottom: 5px solid #f5a3a3;
+            box-shadow: 0 8px 15px #4f0e15;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1::before {
+            content: "🧬";
+            font-size: 2.3rem;
+            filter: drop-shadow(0 0 4px #ffcdcd);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .counter {
+            background: #771e28;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            min-width: 110px;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            border: 2px solid #fbc1c1;
+            color: #ffecec;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: #f2cfcf;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #c6444e, #9b242f);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 12px #d44f5a;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #fbdfe3;
+        }
+
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(150, 40, 50, 0.2);
+            border: 2px solid #f6b6b6;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            background: linear-gradient(145deg, #b33b46, #821d27);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 3px solid #ffb6b6;
+            box-shadow: 0 7px 0 #54131b;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #55141f;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 20px 22px;
+            border: 3px solid #fad1d1;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 5px 12px rgba(170, 60, 60, 0.08);
+        }
+
+        .option:hover {
+            background: #fff2f2;
+            border-color: #bf4b56;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 25px rgba(175, 70, 70, 0.15);
+        }
+
+        .option-letter {
+            background: linear-gradient(145deg, #b73f4a, #922b34);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            border: 2px solid #fec1c1;
+        }
+
+        .option.correct {
+            background: linear-gradient(145deg, #c6e6d4, #b2dec6);
+            border-color: #2b7a56;
+            color: #1b4f32;
+        }
+        .option.correct .option-letter {
+            background: #1f7a51;
+            border-color: #b7f0d4;
+        }
+
+        .option.incorrect {
+            background: linear-gradient(145deg, #fad7d2, #fecbc3);
+            border-color: #b14242;
+            color: #631e1e;
+        }
+        .option.incorrect .option-letter {
+            background: #b84545;
+            border-color: #f5b7b7;
+        }
+
+        .feedback-area {
+            flex-shrink: 0;
+        }
+
+        .feedback {
+            padding: 25px;
+            border-radius: 20px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(145deg, #daf0da, #c8e6c8);
+            border: 3px solid #2e7d5a;
+            color: #1b4d2b;
+            display: flex;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #ffdedb, #fecbc7);
+            border: 3px solid #bb3b3b;
+            color: #632020;
+            display: flex;
+        }
+
+        .feedback-icon {
+            font-size: 2rem;
+        }
+
+        .rationale {
+            background: linear-gradient(145deg, #ffe8e8, #ffdbdb);
+            border: 3px solid #b34b56;
+            border-radius: 20px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        .rationale.show {
+            display: block;
+        }
+        .rationale h4 {
+            color: #94232e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        .rationale p {
+            color: #771e2b;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 35px;
+            background: #f3cfd2;
+            border-top: 3px solid #e5a8a8;
+            flex-shrink: 0;
+            height: 85px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 16px 42px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 6px 0 #661e28;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #b1424d, #85232e);
+            color: white;
+            border: 2px solid #fbc0c0;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #511a22, 0 8px 20px #bc4d58;
+        }
+        .btn-secondary {
+            background: linear-gradient(145deg, #9b4b54, #712c34);
+            color: white;
+            border: 2px solid #f5c2c2;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #4b1d24, 0 8px 20px #9f4852;
+        }
+        .btn-cancel {
+            background: linear-gradient(145deg, #c27f7f, #aa4a4a);
+            color: white;
+            display: none;
+            border: 2px solid #f3baba;
+        }
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 0 #632d2d;
+        }
+        .btn-cancel.show {
+            display: flex;
+        }
+
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 0 #5e202a;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 700px) {
+            .question-text { font-size: 1.2rem; }
+            .option { font-size: 1rem; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Chapter 28: Hematologic Function & Treatment</h1>
+            <div class="subtitle">40 questions · erythropoiesis · coagulation · transfusion</div>
+        </div>
+        <div class="counter" id="counter">1/40</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>🩸 HEMATOLOGY RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">⬅️ PREV</button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">✖️ CANCEL</button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">NEXT ➡️</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ----- Chapter 28 exact questions (40 items) -----
+    const questions = [
+        { //1
+            id: 1,
+            question: "A client with a hematologic disorder asks the nurse how the body forms blood cells. The nurse understands that this process takes place primarily in which location?",
+            options: [
+                "A. Spleen",
+                "B. Kidneys",
+                "C. Bone marrow",
+                "D. Liver"
+            ],
+            correct: 2, // C
+            rationale: "Bone marrow is primary site for hematopoiesis. (PTS:1 REF:p.885)"
+        },
+        { //2
+            id: 2,
+            question: "A client suffers a leg wound which causes minor blood loss. As a result of bleeding, the process of primary hemostasis is activated. What will occur during this process?",
+            options: [
+                "A. Severed blood vessels constrict.",
+                "B. Thromboplastin is released.",
+                "C. Prothrombin is converted to thrombin.",
+                "D. Fibrin is lysed."
+            ],
+            correct: 0, // A
+            rationale: "Primary hemostasis: vessel constriction + platelet aggregation. Secondary: thromboplastin release, prothrombin→thrombin. (PTS:1 REF:p.890)"
+        },
+        { //3
+            id: 3,
+            question: "A client has come to the OB/GYN clinic due to recent heavy menstrual flow. Because of the client's consequent increase in red cell production, the nurse should recommend the client increase daily intake of what substance?",
+            options: [
+                "A. Vitamin E",
+                "B. Vitamin D",
+                "C. Iron",
+                "D. Magnesium"
+            ],
+            correct: 2, // C
+            rationale: "Iron incorporated into hemoglobin; increased RBC production demands iron. (PTS:1 REF:p.888)"
+        },
+        { //4
+            id: 4,
+            question: "The nurse is planning the care of a client with a nutritional deficit and a diagnosis of megaloblastic anemia. The nurse should recognize that this client's health problem is due to which issue with the red blood cells (RBCs)?",
+            options: [
+                "A. Production of inadequate quantities of RBCs",
+                "B. Premature release of immature RBCs",
+                "C. Injury to the RBCs in circulation",
+                "D. Abnormalities in the structure and function of RBCs"
+            ],
+            correct: 3, // D
+            rationale: "Megaloblastic anemia (B12/folate deficiency) → abnormally large erythrocytes (megaloblasts) with structural/functional abnormalities. (PTS:1 REF:p.888)"
+        },
+        { //5
+            id: 5,
+            question: "A nurse is caring for a client who is undergoing preliminary testing for a hematologic disorder. Which sign or symptom of a hematologic disorder is most common?",
+            options: [
+                "A. Sudden change in level of consciousness (LOC)",
+                "B. Recurrent infections",
+                "C. Anaphylaxis",
+                "D. Severe fatigue"
+            ],
+            correct: 3, // D
+            rationale: "Most common indicator = extreme fatigue. (PTS:1 REF:p.892)"
+        },
+        { //6
+            id: 6,
+            question: "The nurse caring for a client receiving a transfusion notes that 15 minutes after the infusion of packed red blood cells (PRBCs) has begun, the client is having difficulty breathing and reports severe chest tightness. What is the most appropriate initial action for the nurse to take?",
+            options: [
+                "A. Notify the client's health care provider.",
+                "B. Stop the transfusion immediately.",
+                "C. Remove the client's IV access.",
+                "D. Assess the client's chest sounds and vital signs."
+            ],
+            correct: 1, // B
+            rationale: "Suspect severe reaction: stop transfusion immediately. Then assess, notify provider, maintain IV access. (PTS:1 REF:p.906)"
+        },
+        { //7
+            id: 7,
+            question: "The nurse is describing the role of plasminogen in the clotting cascade. Where in the body is plasminogen present?",
+            options: [
+                "A. Myocardial muscle tissue",
+                "B. All body fluids",
+                "C. Cerebral tissue",
+                "D. Venous and arterial vessel walls"
+            ],
+            correct: 1, // B
+            rationale: "Plasminogen present in all body fluids, circulates with fibrinogen. (PTS:1 REF:p.891)"
+        },
+        { //8
+            id: 8,
+            question: "The nurse is caring for a client who has developed scar tissue in many of the areas that normally produce blood cells. What organs can become active in blood cell production by the process of extramedullary hematopoiesis?",
+            options: [
+                "A. Spleen and kidneys",
+                "B. Kidneys and pancreas",
+                "C. Pancreas and liver",
+                "D. Liver and spleen"
+            ],
+            correct: 3, // D
+            rationale: "Extramedullary hematopoiesis occurs in liver and spleen when marrow is destroyed/fibrosed. (PTS:1 REF:p.885)"
+        },
+        { //9
+            id: 9,
+            question: "Through the process of hematopoiesis, stem cells differentiate into either myeloid or lymphoid stem cells. Into what do myeloid stem cells further differentiate? Select all that apply.",
+            options: [
+                "A. Leukocytes",
+                "B. Natural killer cells",
+                "C. Cytokines",
+                "D. Platelets",
+                "E. Erythrocytes"
+            ],
+            correct: [0,3,4], // A, D, E
+            rationale: "Myeloid stem cells → erythrocytes, leukocytes, platelets. Natural killer cells & cytokines not from myeloid. (PTS:1 REF:p.885)"
+        },
+        { //10
+            id: 10,
+            question: "A client's wound has begun to heal and the blood clot which formed is no longer necessary. When a blood clot is no longer needed, the fibrinogen and fibrin will be digested by which of the following?",
+            options: [
+                "A. Plasminogen",
+                "B. Thrombin",
+                "C. Prothrombin",
+                "D. Plasmin"
+            ],
+            correct: 3, // D
+            rationale: "Plasminogen activated to plasmin → digests fibrinogen/fibrin. (PTS:1 REF:p.891)"
+        },
+        { //11
+            id: 11,
+            question: "A client undergoing a hip replacement has autologous blood on standby if a transfusion is needed. What is the primary advantage of autologous transfusions?",
+            options: [
+                "A. Safe transfusion for clients with a history of transfusion reactions",
+                "B. Prevention of viral infections from another person's blood",
+                "C. Avoidance of complications in clients with alloantibodies",
+                "D. Prevention of alloimmunization"
+            ],
+            correct: 1, // B
+            rationale: "Primary advantage: prevents viral infections from donor blood. (PTS:1 REF:p.898)"
+        },
+        { //12
+            id: 12,
+            question: "A client has been diagnosed with a lymphoid stem cell defect. This client has the potential for a problem involving which of the following?",
+            options: [
+                "A. Plasma cells",
+                "B. Neutrophils",
+                "C. Red blood cells",
+                "D. Platelets"
+            ],
+            correct: 0, // A
+            rationale: "Lymphoid stem cell → T/B lymphocytes, plasma cells, NK cells. Myeloid defect affects RBCs, neutrophils, platelets. (PTS:1 REF:p.885)"
+        },
+        { //13
+            id: 13,
+            question: "The nurse is describing normal erythrocyte physiology to a client who has a diagnosis of anemia. The nurse should explain that the erythrocytes consist primarily of which substance?",
+            options: [
+                "A. Plasminogen",
+                "B. Hemoglobin",
+                "C. Hematocrit",
+                "D. Fibrin"
+            ],
+            correct: 1, // B
+            rationale: "Mature erythrocytes consist primarily of hemoglobin (95% of cell mass). (PTS:1 REF:p.887)"
+        },
+        { //14
+            id: 14,
+            question: "The nurse educating a client with anemia is describing the process of red blood cell production. When the client's kidneys sense a low level of oxygen in circulating blood, which physiologic response is initiated?",
+            options: [
+                "A. Increased stem cell synthesis",
+                "B. Decreased respiratory rate",
+                "C. Arterial vasoconstriction",
+                "D. Increased levels of erythropoietin"
+            ],
+            correct: 3, // D
+            rationale: "Low O2 → kidneys increase erythropoietin → stimulates RBC production. (PTS:1 REF:p.887)"
+        },
+        { //15
+            id: 15,
+            question: "An older adult client is exhibiting many of the characteristic signs and symptoms of iron deficiency. In addition to a complete blood count, what diagnostic assessment should the nurse anticipate?",
+            options: [
+                "A. Stool for occult blood",
+                "B. Bone marrow biopsy",
+                "C. Lumbar puncture",
+                "D. Urinalysis"
+            ],
+            correct: 0, // A
+            rationale: "Iron deficiency in adult often indicates blood loss; stool occult blood test checks GI bleeding. (PTS:1 REF:p.888)"
+        },
+        { //16
+            id: 16,
+            question: "A client is being treated for the effects of a longstanding vitamin B12 deficiency. Which aspect of the client's health history would most likely predispose the client to this deficiency?",
+            options: [
+                "A. The client has irregular menstrual periods.",
+                "B. The client is a vegan.",
+                "C. The client donated blood 60 days ago.",
+                "D. The client frequently smokes marijuana."
+            ],
+            correct: 1, // B
+            rationale: "B12 found only in animal foods; vegans at risk for deficiency. (PTS:1 REF:p.888)"
+        },
+        { //17
+            id: 17,
+            question: "The nurse's review of a client's most recent blood work reveals a significant increase in the number of band cells. The nurse's subsequent assessment should focus on which of the following?",
+            options: [
+                "A. Respiratory function",
+                "B. Evidence of decreased tissue perfusion",
+                "C. Signs and symptoms of infection",
+                "D. Recent changes in activity tolerance"
+            ],
+            correct: 2, // C
+            rationale: "Increased band cells (left shift) suggests infection. (PTS:1 REF:p.889)"
+        },
+        { //18
+            id: 18,
+            question: "A nurse is educating a client about the role of B lymphocytes. The nurse's description will include which of the following physiologic processes?",
+            options: [
+                "A. Stem cell differentiation",
+                "B. Cytokine production",
+                "C. Phagocytosis",
+                "D. Antibody production"
+            ],
+            correct: 3, // D
+            rationale: "B lymphocytes differentiate into plasma cells → produce antibodies. (PTS:1 REF:p.889)"
+        },
+        { //19
+            id: 19,
+            question: "A client's most recent blood work reveals low levels of albumin. This assessment finding should suggest the possibility of what nursing diagnosis?",
+            options: [
+                "A. Risk for imbalanced fluid volume related to low albumin",
+                "B. Risk for infection related to low albumin",
+                "C. Ineffective tissue perfusion related to low albumin",
+                "D. Impaired skin integrity related to low albumin"
+            ],
+            correct: 0, // A
+            rationale: "Albumin maintains vascular fluid balance; deficiency → fluid imbalance risk. (PTS:1 REF:p.890)"
+        },
+        { //20
+            id: 20,
+            question: "A client has sustained a cut to the hand, immediately initiating the process of hemostasis. Following vasoconstriction, which event in the process of hemostasis will take place?",
+            options: [
+                "A. Fibrin will be activated at the bleeding site.",
+                "B. Platelets will aggregate at the injury site.",
+                "C. Thromboplastin will form a clot.",
+                "D. Prothrombin will be converted to thrombin."
+            ],
+            correct: 1, // B
+            rationale: "After vasoconstriction, platelets aggregate and adhere → unstable plug. (PTS:1 REF:p.890)"
+        },
+        { //21
+            id: 21,
+            question: "The nurse is providing care for a 73-year-old client who has a hematologic disorder. Which change in hematologic function is age-related?",
+            options: [
+                "A. Bone marrow in older adults produces a smaller proportion of healthy, functional blood cells.",
+                "B. Older adults are less able to increase blood cell production when demand suddenly increases.",
+                "C. Stem cells in older adults eventually lose their ability to differentiate.",
+                "D. The ratio of plasma to erythrocytes and lymphocytes increases with age."
+            ],
+            correct: 1, // B
+            rationale: "With aging, marrow may not adequately increase production when demand rises. (PTS:1 REF:p.891)"
+        },
+        { //22
+            id: 22,
+            question: "A client's health history reveals daily consumption of two to three bottles of wine. The nurse would consider increased risk for which hematologic disorder when planning assessments and interventions for this client?",
+            options: [
+                "A. Leukemia",
+                "B. Anemia",
+                "C. Thrombocytopenia",
+                "D. Lymphoma"
+            ],
+            correct: 1, // B
+            rationale: "Heavy alcohol use associated with anemia (and other cytopenias). (PTS:1 REF:p.893)"
+        },
+        { //23
+            id: 23,
+            question: "A client's diagnosis of atrial fibrillation has prompted the primary care provider to prescribe warfarin. When assessing the therapeutic response to this medication, which action by the nurse is the most appropriate?",
+            options: [
+                "A. Assess for signs of myelosuppression.",
+                "B. Review the client's platelet level.",
+                "C. Assess the client's capillary refill time.",
+                "D. Review the client's international normalized ratio (INR)."
+            ],
+            correct: 3, // D
+            rationale: "INR monitors warfarin therapy. (PTS:1 REF:p.894)"
+        },
+        { //24
+            id: 24,
+            question: "A client has been scheduled for a bone marrow aspiration and admits to the nurse being worried about the pain involved with the procedure. Which statement by the nurse when providing client education would be most accurate?",
+            options: [
+                "A. 'You'll be given painkillers before the test, so there won't likely be any pain.'",
+                "B. 'You'll feel some pain when the needle enters your skin, but none during the aspiration.'",
+                "C. 'Most people feel some brief, sharp pain when the marrow is aspirated.'",
+                "D. 'I'll be there with you, and I'll try to help you keep your mind off the pain.'"
+            ],
+            correct: 2, // C
+            rationale: "Aspiration always causes sharp, brief pain (suction). Warn patient. (PTS:1 REF:p.894)"
+        },
+        { //25
+            id: 25,
+            question: "A client is scheduled for a splenectomy. During discharge education, which teaching point should the nurse prioritize?",
+            options: [
+                "A. Adhering to prescribed immunosuppressant therapy",
+                "B. Reporting any signs or symptoms of infection promptly",
+                "C. Ensuring adequate folate, iron, and vitamin B12 intake",
+                "D. Limiting activity postoperatively to prevent hemorrhage"
+            ],
+            correct: 1, // B
+            rationale: "Post-splenectomy infection risk ↑; report even minor signs promptly. (PTS:1 REF:p.895)"
+        },
+        { //26
+            id: 26,
+            question: "The nurse's brief review of a client's electronic health record indicates that the client regularly undergoes therapeutic phlebotomy. Which of the following rationales for this procedure is most plausible?",
+            options: [
+                "A. The client may chronically produce excess red blood cells.",
+                "B. The client may frequently experience a low relative plasma volume.",
+                "C. The client may have impaired stem cell function.",
+                "D. The client may previously have undergone bone marrow biopsy."
+            ],
+            correct: 0, // A
+            rationale: "Therapeutic phlebotomy for polycythemia (excess RBCs). (PTS:1 REF:p.896)"
+        },
+        { //27
+            id: 27,
+            question: "A nurse has participated in organizing a blood donation drive at a local community center. Which client would most likely be disallowed from donating blood?",
+            options: [
+                "A. A client who is 81 years of age",
+                "B. A client whose blood pressure is 78/49 mm Hg",
+                "C. A client who donated blood 4 months ago",
+                "D. A client who has type 1 diabetes"
+            ],
+            correct: 1, // B
+            rationale: "BP must be 80–180 systolic / 50–100 diastolic. Hypotensive donor deferred. (PTS:1 REF:p.897)"
+        },
+        { //28
+            id: 28,
+            question: "A nurse at a blood donation clinic has completed the collection of blood from a client. The client reports feeling 'light-headed' and appears pale. Which action by the nurse is most appropriate?",
+            options: [
+                "A. Help the client to sit, with head lowered below knees.",
+                "B. Administer supplementary oxygen by nasal prongs.",
+                "C. Obtain a full set of vital signs.",
+                "D. Inform a health care provider or other primary care provider."
+            ],
+            correct: 0, // A
+            rationale: "Faintness/pale: lower head below knees to improve cerebral perfusion. (PTS:1 REF:p.898)"
+        },
+        { //29
+            id: 29,
+            question: "A client's low hemoglobin level has necessitated transfusion of packed red blood cells. Prior to administration, which action should the nurse perform?",
+            options: [
+                "A. Have the client identify the blood type in writing.",
+                "B. Ensure that the client has granted verbal consent for transfusion.",
+                "C. Assess the client's vital signs to establish baselines.",
+                "D. Facilitate insertion of a central venous catheter."
+            ],
+            correct: 2, // C
+            rationale: "Baseline vitals required before transfusion. Written consent needed; peripheral IV adequate. (PTS:1 REF:p.900)"
+        },
+        { //30
+            id: 30,
+            question: "A client on the medical unit is receiving a unit of packed red blood cells (PRBCs). Difficult intravenous (IV) access has necessitated a slow infusion rate, and the nurse notes that the infusion began 4 hours ago. Which action by the nurse is the most appropriate?",
+            options: [
+                "A. Apply an icepack to the blood that remains to be infused.",
+                "B. Discontinue the remainder of the PRBC transfusion, and inform the health care provider.",
+                "C. Disconnect the bag of PRBCs, cool for 30 minutes, and then administer.",
+                "D. Administer the remaining PRBCs by the IV direct (IV push) route."
+            ],
+            correct: 1, // B
+            rationale: "Transfusion must be completed within 4 hours (bacterial proliferation risk). Discard remainder. (PTS:1 REF:p.901)"
+        },
+        { //31
+            id: 31,
+            question: "Two units of packed red blood cells have been prescribed for a client who has experienced a gastrointestinal bleed. The client is highly reluctant to receive a transfusion, stating, 'I'm terrified of getting acquired immunodeficiency syndrome (AIDS) from a blood transfusion.' How can the nurse best address the client's concerns?",
+            options: [
+                "A. 'All donated blood is treated with antiretroviral medications before it is used.'",
+                "B. 'That did happen in some high-profile cases in the 20th century, but it is no longer a possibility.'",
+                "C. 'HIV was eradicated from the blood supply in the early 2000s.'",
+                "D. 'Donated blood is screened for human immunodeficiency virus (HIV), and the risk of contraction is very low.'"
+            ],
+            correct: 3, // D
+            rationale: "Reassure with facts: blood screened, risk extremely low. Avoid false absolute claims. (PTS:1 REF:p.905)"
+        },
+        { //32
+            id: 32,
+            question: "A client is being treated in the ICU after a medical error resulted in an acute hemolytic transfusion reaction. What was the etiology of this client's adverse reaction?",
+            options: [
+                "A. Antibodies to donor leukocytes remained in the blood.",
+                "B. The donor blood was incompatible with that of the client.",
+                "C. The client had a sensitivity reaction to a plasma protein in the blood.",
+                "D. The blood was infused too quickly and overwhelmed the client's circulatory system."
+            ],
+            correct: 1, // B
+            rationale: "Acute hemolytic reaction = ABO incompatibility (donor incompatible). (PTS:1 REF:p.901)"
+        },
+        { //33
+            id: 33,
+            question: "An interdisciplinary team has been commissioned to create policies and procedures aimed at preventing acute hemolytic transfusion reactions. What action has the greatest potential to reduce the risk of this transfusion reaction?",
+            options: [
+                "A. Ensure that blood components are never infused at a rate greater than 125 mL/h.",
+                "B. Administer prophylactic antihistamines prior to all blood transfusions.",
+                "C. Establish baseline vital signs for all clients receiving transfusions.",
+                "D. Be vigilant in identifying the client and the blood component."
+            ],
+            correct: 3, // D
+            rationale: "Most hemolytic reactions caused by identification errors. Proper ID is key. (PTS:1 REF:p.901)"
+        },
+        { //34
+            id: 34,
+            question: "A client is receiving a blood transfusion and reports a new onset of slight dyspnea. The nurse's rapid assessment reveals bilateral lung crackles and elevated BP. What is the nurse's most appropriate action?",
+            options: [
+                "A. Slow the infusion rate and monitor the client closely.",
+                "B. Discontinue the transfusion and begin resuscitation.",
+                "C. Pause the transfusion and administer a 250 mL bolus of normal saline.",
+                "D. Discontinue the transfusion and administer a beta-blocker, as prescribed."
+            ],
+            correct: 0, // A
+            rationale: "Early signs of hypervolemia: slow rate, monitor closely. (PTS:1 REF:p.904)"
+        },
+        { //35
+            id: 35,
+            question: "A client lives with a diagnosis of sickle cell disease and receives frequent blood transfusions. The nurse should recognize the client's consequent risk of what complication of treatment?",
+            options: [
+                "A. Hypovolemia",
+                "B. Vitamin B12 deficiency",
+                "C. Thrombocytopenia",
+                "D. Iron overload"
+            ],
+            correct: 3, // D
+            rationale: "Chronic transfusions → iron overload (hemosiderosis). (PTS:1 REF:p.905)"
+        },
+        { //36
+            id: 36,
+            question: "A client is receiving the first of two prescribed units of PRBCs. Shortly after the initiation of the transfusion, the client reports chills and experiences a sharp increase in temperature. What is the nurse's priority action?",
+            options: [
+                "A. Position the client in high Fowler position",
+                "B. Discontinue the transfusion.",
+                "C. Auscultate the client's lungs.",
+                "D. Obtain a blood specimen from the client."
+            ],
+            correct: 1, // B
+            rationale: "Suspected reaction → stop transfusion first. (PTS:1 REF:p.903)"
+        },
+        { //37
+            id: 37,
+            question: "Fresh-frozen plasma (FFP) has been prescribed for a hospital client. Prior to administration of this blood product, the nurse should prioritize which client education?",
+            options: [
+                "A. Infection risks associated with FFP administration",
+                "B. Physiologic functions of plasma",
+                "C. Signs and symptoms of a transfusion reaction",
+                "D. Strategies for managing transfusion-associated anxiety"
+            ],
+            correct: 2, // C
+            rationale: "Teach signs of transfusion reaction first (safety). (PTS:1 REF:p.903)"
+        },
+        { //38
+            id: 38,
+            question: "The nurse is preparing to administer a unit of platelets to an adult client. When administering this blood product, which of the following actions should the nurse perform?",
+            options: [
+                "A. Administer the platelets as rapidly as the client can tolerate.",
+                "B. Establish IV access as soon as the platelets arrive from the blood bank.",
+                "C. Ensure that the client has a patent central venous catheter.",
+                "D. Aspirate 10 to 15 mL of blood from the client's IV immediately following the transfusion."
+            ],
+            correct: 0, // A
+            rationale: "Platelets infused rapidly to diminish clumping. IV access before arrival; peripheral IV (22G) adequate. (PTS:1 REF:p.902)"
+        },
+        { //39
+            id: 39,
+            question: "Which of the following circumstances would most clearly warrant autologous blood donation?",
+            options: [
+                "A. The client has type-O blood.",
+                "B. The client has sickle cell disease or a thalassemia.",
+                "C. The client has elective surgery pending.",
+                "D. The client has hepatitis C."
+            ],
+            correct: 2, // C
+            rationale: "Autologous donation useful for elective surgery with high transfusion probability. (PTS:1 REF:p.898)"
+        },
+        { //40
+            id: 40,
+            question: "A client is scheduled to undergo a bone marrow aspiration. When preparing the client for the procedure, which action would the nurse do first?",
+            options: [
+                "A. Ensure informed consent has been obtained.",
+                "B. Cleanse the skin with an antiseptic.",
+                "C. Administer a local anesthetic.",
+                "D. Cover the area with a sterile drape."
+            ],
+            correct: 0, // A
+            rationale: "First: ensure informed consent. Then position, cleanse, drape, anesthetize. (PTS:1 REF:p.894)"
+        }
+    ];
+
+    // ----- identical navigation/selection logic as template -----
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[currentQuestion];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'FINISH ➡️' : 'NEXT ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[currentQuestion];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[currentQuestion] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT!';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. Correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[currentQuestion] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[currentQuestion];
+            loadQuestion();
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
